@@ -1,0 +1,51 @@
+ import pandas as pd
+
+#init data
+data1 = {
+    'Make': ['utv/atv'],
+    'Model': ['all models'],
+    'Vendor Code': ['NACH'],
+    'Vendor Name': ['NACHMAN INTERNATIONAL CO. LTD'],
+    
+     'MPN': ['105-192**'],
+    
+    'AD ITEM NUMBER': ['122297'],
+    
+    'Vendor Notes': ['BRAKE'],
+}
+
+#List of Models
+
+list_models = [
+    
+'YFM50 Raptor',
+'YFM80 Badger',
+'YFM80 Grizzly',
+'YFM80W Raptor',
+'YFA-1 Breeze125',
+'YFB250 Timberwolf 2x4',
+'YFB250FW Timberwolf 4x4'
+    
+
+]
+#Range of years
+years = list(range(1989, 2009))
+
+#Function to generate Dataframe for each model
+def generate_df(model, data, year):
+    data_copy = data.copy() # Creating a copy of data1 to avoid modifying the original dictionary
+    data_copy['Model'] = model
+    data_copy['Year'] = year
+    return pd.DataFrame(data_copy)
+
+# Generate DataFrames for all sets of data
+dfs = []
+for year in years:
+    df1 = pd.concat([generate_df(model, data1, year) for model in list_models], ignore_index=True)
+    dfs.append(df1)
+
+# Concatenate all DataFrames
+final_df = pd.concat(dfs, ignore_index=True)
+
+# Print / Display
+final_df
