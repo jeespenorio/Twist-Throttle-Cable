@@ -1,0 +1,63 @@
+ import pandas as pd
+
+#init data
+data1 = {
+    'Make': ['utv/atv'],
+    'Model': ['all models'],
+    'Vendor Code': ['NACH'],
+    'Vendor Name': ['NACHMAN INTERNATIONAL CO. LTD'],
+    
+     'MPN': ['104-330'],
+    
+    'AD ITEM NUMBER': ['122294'],
+    
+    'Vendor Notes': ['THUMB THROTTLE'],
+}
+
+#List of Models
+
+list_models = [
+    
+'LT-A450X KingQuad AXi 4x4',
+'LT-A500F QuadMaster',
+'LT-A500F Vinson 500 4x4 Auto',
+'LT-A500 KingQuad AXi',
+'LT-A500 KingQuad AXi Power Steering',
+'LT-A500 KingQuad AXi Power Steering SE',
+'LT-A500 KingQuad AXi Power Steering SE Rugged',
+'LT-A500 KingQuad AXi Power Steering SE+',
+'LT-A500 KingQuad AXi Power Steering Rugged',
+'LT-A500 KingQuad AXi Power Steering SE+ Rugged',
+'LT-A750X KingQuad AXi 4x4',
+'LT-A750 KingQuad AXi Power Steering',
+'LT-A750X KingQuad AXi 4x4 LE',
+'LT-A750 KingQuad AXi Power Steering LE',
+'LT-A750 KingQuad AXi Power Steering SE',
+'LT-A750 KingQuad AXi Power Steering SE Rugged',
+'LT-A750 KingQuad AXi Power Steering SE+',
+'LT-A750 KingQuad AXi Power Steering Rugged',
+'LT-A750 KingQuad AXi Power Steering SE+ Rugged'
+
+
+]
+#Range of years
+years = list(range(2010, 2023))
+
+#Function to generate Dataframe for each model
+def generate_df(model, data, year):
+    data_copy = data.copy() # Creating a copy of data1 to avoid modifying the original dictionary
+    data_copy['Model'] = model
+    data_copy['Year'] = year
+    return pd.DataFrame(data_copy)
+
+# Generate DataFrames for all sets of data
+dfs = []
+for year in years:
+    df1 = pd.concat([generate_df(model, data1, year) for model in list_models], ignore_index=True)
+    dfs.append(df1)
+
+# Concatenate all DataFrames
+final_df = pd.concat(dfs, ignore_index=True)
+
+# Print / Display
+final_df
