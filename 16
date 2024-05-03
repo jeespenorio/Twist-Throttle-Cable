@@ -1,0 +1,62 @@
+import pandas as pd
+
+#init data
+data1 = {
+
+    'Make': ['utv/atv'],
+    'Model': ['all models'],
+    'Vendor Code': ['NACH'],
+    'Vendor Name': ['NACHMAN INTERNATIONAL CO. LTD'],
+    
+    'MPN': ['110-131'],
+    
+    'AD ITEM NUMBER': ['127675'],
+    
+    'Vendor Notes': ['THUMB THROTTLE'],
+}
+
+#List of Models
+list_models = [  
+
+'Outlander 330 HO 2x4',
+'Outlander 330 HO 4x4',
+'Outlander 400 HO 2x4',
+'Outlander 400 HO 4x4',
+'Outlander 400 HO 4x4 XT',
+'Outlander 400 HO',
+'Outlander 400 HO XT',
+'Outlander 400 HO EFI',
+'Outlander 400 HO EFI XT',
+'Outlander 400 EFI XT',
+'Outlander 400 EFI',
+'Outlander Max 400 HO',
+'Outlander Max 400 HO XT',
+'Outlander Max 400 HO EFI',
+'Outlander Max 400 HO EFI XT',
+'Outlander Max 400 EFI XT',
+'Outlander Max 400 EFI'
+
+
+]
+#Range of years
+years = list(range(2003, 2009))
+
+#Functions to generate the DF for each model
+def generate_df(model, data, year):
+    data_copy = data.copy() #creates a copy for data1 to avoid modifying the original dictionary
+    data_copy['Model'] = model
+    data_copy['Year'] = year
+    return pd.DataFrame(data_copy)
+
+#Generate DF's for all the sets of data
+dfs =[]
+for year in years:
+    df1 = pd.concat([generate_df(model,data1,year) for model in list_models], ignore_index=True)
+    dfs.append(df1)
+    
+#Concatenate all DFs
+final_df = pd.concat(dfs, ignore_index=True)
+
+
+#Display
+final_df
