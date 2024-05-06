@@ -1,0 +1,73 @@
+
+import pandas as pd
+
+#init data
+
+data1 = {
+    'Make':['utv/atv'],
+    'Model':['all models'],
+    'Vendor Code':['NACH'],
+    'Vendor Name':['NAHMAN INTERNATIONAL CO. LTD'],
+    
+    'MPN':['AT-05399'],
+    
+    'AD ITEM NUMBER':['128751'],
+    
+    'VENDOR NAME':['BRAKE'],
+}
+
+#lists of Models
+
+list_models = [
+
+'TRX500FA FourTrax Foreman Rubicon',
+'TRX500FGA FourTrax Foreman Rubicon GPScape',
+'TRX500FE FourTrax Foreman 4x4 ES',
+'TRX500FM FourTrax Foreman 4x4',
+'TRX500FPE FourTrax Foreman 4x4 ES w/Power Steering',
+'TRX500FPM FourTrax Foreman 4x4 w/ Power Steering',
+'TRX500TM FourTrax Foreman',
+'TRX500FPA FourTrax Foreman Rubicon with EPS',
+'TRX500FM1 FourTrax Foreman 4x4',
+'TRX500FE1 FourTrax Foreman 4x4 ES',
+'TRX500FM2 FourTrax Foreman 4x4 with EPS',
+'TRX500FE2 FourTrax Foreman 4x4 ES with EPS',
+'TRX500FM5 FourTrax Foreman Rubicon',
+'TRX500FM6 FourTrax Foreman Rubicon EPS',
+'TRX500FM6D FourTrax Foreman Rubicon EPS DLX',
+'TRX500FA5 FourTrax Foreman Rubicon Auto DCT',
+'TRX500FA6 FourTrax Foreman Rubicon Auto DCT EPS',
+'TRX500FA6D FourTrax Foreman Rubicon Auto DCT EPS D',
+'TRX500FA7 FourTrax Foreman Rubicon Auto DCT EPS DL',
+'TRX500FM7 FourTrax Foreman Rubicon EPS DLX',
+'TRX520FM1 FourTrax Foreman 4x4',
+'TRX520FM2 FourTrax Foreman 4x4 EPS',
+'TRX520FE2 FourTrax Foreman 4x4 ES EPS',
+'TRX520FM6 FourTrax Foreman Rubicon EPS',
+'TRX520FA5 FourTrax Foreman Rubicon Auto DCT',
+'TRX520FA6 FourTrax Foreman Rubicon Auto DCT EPS',
+'TRX520FA7 FourTrax Foreman Rubicon Auto DCT EPS DL'
+
+    
+]
+#range of years
+years = list(range(2015, 2022))
+
+#FUnctions to generate the DF for each model
+def generate_df(model, data, year):
+    data_copy = data.copy() # Creates a copy for data to avoid modifying the original library
+    data_copy['Model'] = model
+    data_copy['Year'] = year
+    return pd.DataFrame(data_copy)
+
+#Generate DF's for all the sets of data
+dfs=[]
+for year in years:
+    df1 = pd.concat([generate_df(model,data1,year) for model in list_models], ignore_index = True)
+    dfs.append(df1)
+    
+#Concatenate all DF's created
+final_df = pd.concat(dfs, ignore_index=True)
+
+#Display
+final_df
