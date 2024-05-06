@@ -1,0 +1,67 @@
+
+import pandas as pd
+
+#init data
+
+data1 = {
+    'Make':['utv/atv'],
+    'Model':['all models'],
+    'Vendor Code':['NACH'],
+    'Vendor Name':['NAHMAN INTERNATIONAL CO. LTD'],
+    
+    'MPN':['AT-05954'],
+    
+    'AD ITEM NUMBER':['128276'],
+    
+    'VENDOR NAME':['THUMB THROTTLE'],
+}
+
+#lists of Models
+
+list_models = [
+
+'Sportsman 570',
+'Sportsman 570 EPS',
+'Sportsman 570 Touring',
+'Sportsman 570 SP',
+'Sportsman 570 SP Hunters Edition',
+'Sportsman 570 Touring SP',
+'Sportsman 570 X2 EPS',
+'Sportsman 570 Touring EPS',
+'Sportsman 570 Big Boss 6x6 EPS',
+'Sportsman 570 EPS Utility Edition',
+'Sportsman 570 6x6',
+'Sportsman 570 Hunter Edition',
+'Sportsman 570 Premium',
+'Sportsman 570 Touring Premium',
+'Sportsman 570 X2',
+'Sportsman 570 Trail',
+'Sportsman 570 Utility HD LE',
+'Sportsman 570 Hunt Edition',
+'Sportsman 570 Ultimate Trail LE',
+'Sportsman 570 EPS Utility',
+'Sportsman 570 Utility HD'
+
+    
+]
+#range of years
+years = list(range(2014, 2024))
+
+#FUnctions to generate the DF for each model
+def generate_df(model, data, year):
+    data_copy = data.copy() # Creates a copy for data to avoid modifying the original library
+    data_copy['Model'] = model
+    data_copy['Year'] = year
+    return pd.DataFrame(data_copy)
+
+#Generate DF's for all the sets of data
+dfs=[]
+for year in years:
+    df1 = pd.concat([generate_df(model,data1,year) for model in list_models], ignore_index = True)
+    dfs.append(df1)
+    
+#Concatenate all DF's created
+final_df = pd.concat(dfs, ignore_index=True)
+
+#Display
+final_df
