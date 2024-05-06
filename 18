@@ -1,0 +1,85 @@
+
+import pandas as pd
+
+#init data
+
+data1 = {
+    'Make':['utv/atv'],
+    'Model':['all models'],
+    'Vendor Code':['NACH'],
+    'Vendor Name':['NAHMAN INTERNATIONAL CO. LTD'],
+    
+    'MPN':['AT-05955'],
+    
+    'AD ITEM NUMBER':['128277'],
+    
+    'VENDOR NAME':['THUMB THROTTLE'],
+}
+
+#lists of Models
+
+list_models = [
+
+'Sportsman 850 EFI XP',
+'Sportsman 850 EFI XP w/ EPS',
+'Sportsman 850 EFI Touring EPS',
+'Sportsman 850 EFI X2',
+'Sportsman 850 HO Touring EPS Bronze Mist LE',
+'Sportsman 850 HO XP EPS Browning LE',
+'Sportsman 850 HO Touring EPS',
+'Sportsman 850 HO XP EPS',
+'Sportsman 850 HO XP EPS Orange Madness LE',
+'Sportsman 850 HO XP',
+'Sportsman Forest 850',
+'Scrambler 850 XP HO',
+'Scrambler 850 XP HO EPS LE',
+'Sportsman 850 HO XP EPS Stealth Black LE',
+'Sportsman 850 HO Touring EPS Sunset Red LE',
+'Sportsman 850 HO XP EPS Pearl White LE',
+'Sportsman WV850 HO',
+'Sportsman 850',
+'Sportsman 850 SP',
+'Scrambler 850',
+'Sportsman 850 Touring SP',
+'Sportsman 850 High Lifter Edition',
+'Sportsman 850 Premium',
+'Sportsman 850 Touring',
+'Sportsman 850 Ultimate Trail',
+'Scrambler 1000 XP EPS',
+'Scrambler 1000 XP',
+'Scrambler 1000 XP S',
+'Scrambler 1000 XP S LE',
+'Sportsman 1000 XP',
+'Sportsman 1000 Touring XP',
+'Sportsman 1000 XP Hunter Edition',
+'Sportsman 1000 Touring XP Limited',
+'Sportsman 1000 XP High Lifter Edition',
+'Sportsman 1000 XP Premium',
+'Sportsman 1000 XP S',
+'Sportsman 1000 XP Hunt Edition',
+'Sportsman 1000 XP Ultimate Trail',
+'Sportsman 1000 XP Ride Command Edition'
+
+    
+]
+#range of years
+years = list(range(2009, 2024))
+
+#FUnctions to generate the DF for each model
+def generate_df(model, data, year):
+    data_copy = data.copy() # Creates a copy for data to avoid modifying the original library
+    data_copy['Model'] = model
+    data_copy['Year'] = year
+    return pd.DataFrame(data_copy)
+
+#Generate DF's for all the sets of data
+dfs=[]
+for year in years:
+    df1 = pd.concat([generate_df(model,data1,year) for model in list_models], ignore_index = True)
+    dfs.append(df1)
+    
+#Concatenate all DF's created
+final_df = pd.concat(dfs, ignore_index=True)
+
+#Display
+final_df
